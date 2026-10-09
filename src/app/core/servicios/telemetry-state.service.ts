@@ -143,21 +143,21 @@ export class TelemetryStateService {
       const res2 = this.lastRes2;
       const res3 = this.lastRes3;
 
-      const caudalActual = res1?.flujo?.caudal_l_min ?? res1?.caudal ?? res1?.caudalLMin ?? res2?.caudal ?? 0;
+      const caudalActual = res1?.caudal ?? 0;
       
       const pkg: any = {
         timestamp: now,
-        temperatura: res1?.temperatura ?? res2?.temperatura,
-        humedad: res1?.humedad ?? res2?.humedad,
-        ph: res1?.ph ?? res2?.ph,
-        oxigeno: res1?.oxigeno ?? res2?.oxigeno,
-        presion: res1?.presion ?? res3?.bmpPresion,
-        aire: res1?.aire ?? res3?.cjmcu,
-        tds: res1?.tds ?? res2?.tds,
-        turbidez: res1?.turbidez ?? res2?.turbidez,
-        sedimento: res1?.sedimento ?? res2?.sedimento ?? res3?.flyingFishAO,
-        temp_liquido: res1?.temp_liquido ?? res3?.ntcTemperatura ?? res2?.temp_liquido,
-        aguaAnalogico: res1?.aguaAnalogico ?? res1?.agua?.analogico ?? res2?.aguaAnalogico,
+        temperatura: res1?.temperatura ?? 0,
+        humedad: res1?.humedad ?? 0,
+        ph: res1?.ph ?? 0,
+        oxigeno: res1?.oxigeno ?? 0,
+        presion: res1?.presion ?? 0,
+        aire: res1?.aire ?? 0,
+        tds: res1?.tds ?? 0,
+        turbidez: res1?.turbidez ?? 0,
+        sedimento: res1?.sedimento ?? 0,
+        temp_liquido: res1?.temp_liquido ?? 0,
+        aguaAnalogico: res1?.aguaAnalogico ?? 0,
         caudalLMin: caudalActual,
         volumenLitros: this.volumenTotalLitros() + (caudalActual / 60)
       };
