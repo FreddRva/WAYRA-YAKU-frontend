@@ -66,22 +66,26 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   }
 
   exportarPDF() {
-    import('jspdf').then(jsPDF => {
-      import('html2canvas').then(html2canvas => {
-        const element = document.querySelector('main') as HTMLElement;
-        if (!element) return;
+    const element = document.querySelector('main') as HTMLElement;
+    if (!element) return;
+    
+    // Add a temporary class to ensure it's captured properly
+    element.style.background = '#0a0a0a';
+    
+    import('html2canvas').then(html2canvasModule => {
+      import('jspdf').then(jspdfModule => {
+        const html2canvas = html2canvasModule.default;
+        const jsPDF = jspdfModule.default;
         
-        // Add a temporary class to ensure it's captured properly
-        element.style.background = '#0a0a0a';
-        
-        html2canvas.default(element, { 
+        html2canvas(element, { 
           scale: 2, 
           useCORS: true, 
           backgroundColor: '#0a0a0a' 
         }).then(canvas => {
           element.style.background = ''; // reset
           const imgData = canvas.toDataURL('image/png');
-          const pdf = new jsPDF.default('landscape', 'mm', 'a4');
+          const JsPdfClass = (jspdfModule as any).jsPDF || jspdfModule.default;
+          const pdf = new JsPdfClass('landscape', 'mm', 'a4');
           const pdfWidth = pdf.internal.pageSize.getWidth();
           const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
           
