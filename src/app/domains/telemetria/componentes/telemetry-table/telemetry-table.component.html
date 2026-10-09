@@ -6,7 +6,7 @@
         <th class="py-3 px-4 font-normal">TEMP</th>
         <th class="py-3 px-4 font-normal">HUMEDAD</th>
         <th class="py-3 px-4 font-normal">PH</th>
-        <th class="py-3 px-4 font-normal">O2 (mg/L)</th>
+        <th class="py-3 px-4 font-normal">SUELO (ADC)</th>
         <th class="py-3 px-4 font-normal">PRESIÓN</th>
         <th class="py-3 px-4 font-normal">AIRE (PPM)</th>
         <th class="py-3 px-4 font-normal">TDS (PPM)</th>
@@ -22,7 +22,7 @@
           <td class="py-3 px-4 text-[#fb923c] font-mono">{{ log.temperatura | number:'1.1-1' }}°</td>
           <td class="py-3 px-4 text-[#4ade80] font-mono">{{ log.humedad | number:'1.1-1' }}%</td>
           <td class="py-3 px-4 font-mono">{{ log.ph | number:'1.1-2' }}</td>
-          <td class="py-3 px-4 font-mono">{{ log.oxigeno | number:'1.1-2' }}</td>
+          <td class="py-3 px-4 font-mono">{{ log.suelo | number:'1.0-0' }}</td>
           <td class="py-3 px-4 font-mono">{{ log.presion | number:'1.0-1' }}</td>
           <td class="py-3 px-4 font-mono">{{ log.aire }}</td>
           <td class="py-3 px-4 text-[#c084fc] font-mono">{{ log.tds | number:'1.1-1' }}</td>

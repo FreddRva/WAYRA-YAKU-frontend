@@ -36,7 +36,7 @@ export class SensorStatsDialogComponent {
       'temperatura': 'temperatura', 
       'humedad': 'humedad', 
       'ph': 'ph', 
-      'oxigeno': 'oxigeno', 
+      'suelo': 'suelo',
       'presion': 'presion', 
       'aire': 'aire', 
       'tds': 'tds', 
@@ -67,7 +67,7 @@ export class SensorStatsDialogComponent {
     if (id === 'humedad') return '#34d399';
     if (id === 'tds') return '#a78bfa';
     if (id === 'ph') return '#f472b6';
-    if (id === 'oxigeno') return '#60a5fa';
+    if (id === 'suelo') return '#a3e635';
     if (id === 'presion') return '#818cf8';
     if (id === 'aire') return '#2dd4bf';
     if (id === 'turbidez') return '#eab308';
@@ -101,7 +101,7 @@ export class SensorStatsDialogComponent {
       case 'temperatura': return log.temperatura;
       case 'humedad': return log.humedad;
       case 'ph': return log.ph;
-      case 'oxigeno': return log.oxigeno;
+      case 'suelo': return log.suelo;
       case 'presion': return log.presion;
       case 'aire': return log.aire;
       case 'tds': return log.tds;

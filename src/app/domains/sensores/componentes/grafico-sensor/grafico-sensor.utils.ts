@@ -8,7 +8,7 @@ export function getAccentColor(sensorId: string): string {
     case 'humedad': return '#34d399';
     case 'tds': return '#a78bfa';
     case 'ph': return '#f472b6';
-    case 'oxigeno': return '#60a5fa';
+    case 'suelo': return '#a3e635';
     case 'presion': return '#818cf8';
     case 'aire': return '#2dd4bf';
     case 'turbidez': return '#eab308';
@@ -30,7 +30,7 @@ export function mapLogField(sensorId: string, log: TelemetriaLog): number {
     case 'temperatura': return log.temperatura;
     case 'humedad': return log.humedad;
     case 'ph': return log.ph;
-    case 'oxigeno': return log.oxigeno;
+    case 'suelo': return log.suelo;
     case 'presion': return log.presion;
     case 'aire': return log.aire;
     case 'tds': return log.tds;
