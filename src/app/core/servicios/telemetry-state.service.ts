@@ -56,14 +56,11 @@ export class TelemetryStateService {
   iniciar(intervalo: number = 1000) {
     this.intervaloMs.set(intervalo);
     this.cargarHistorial();
-    this.pollAIDiagnostic();
-    if (this.aiInterval) clearInterval(this.aiInterval);
-    this.aiInterval = setInterval(() => this.pollAIDiagnostic(), 1000); // Polling cada segundo para no perder picos
   }
 
   detener() {
     this.subTelemetria?.unsubscribe();
-    if (this.aiInterval) clearInterval(this.aiInterval);
+    if (this.simInterval) clearInterval(this.simInterval);
   }
 
   private cargarHistorial() {
@@ -121,9 +118,13 @@ export class TelemetryStateService {
     this.http.get<any>(`${this.apiUrl()}/api/telemetry/latest`).pipe(timeout(3000)).subscribe({
       next: (res) => { 
         if (res && Object.keys(res).length > 0) {
-          // El backend nos devuelve un solo JSON con todos los datos combinados.
-          // Lo guardamos en lastRes1 para que updateState() lo tome y lo pinte.
           this.lastRes1 = res;
+          this.aiDiagnostic.set({
+            is_anomaly: res.is_anomaly,
+            anomaly_score: res.anomaly_score,
+            status: res.status,
+            anomalous_sensors: res.anomalous_sensors
+          });
         }
       },
       error: () => { 
@@ -134,8 +135,6 @@ export class TelemetryStateService {
       }
     });
   }
-
-
 
   private updateState() {
     try {
@@ -197,36 +196,6 @@ export class TelemetryStateService {
     } catch (ex) {
       // Ignorar error de procesamiento
     }
-  }
-
-  private pollAIDiagnostic() {
-    const list = this.sensores();
-    
-    // Evitar consultar a la IA si los sensores aún no han cargado sus valores reales.
-    // Esto evita que enviemos '0' a Python y genere un pico falso al arrancar.
-    if (list.length === 0 || list.every(s => s.valor === 0)) {
-      return;
-    }
-
-    const payload = {
-      temperatura: list.find(s => s.id === 'temperatura')?.valor ?? 0,
-      humedad: list.find(s => s.id === 'humedad')?.valor ?? 0,
-      tds: list.find(s => s.id === 'tds')?.valor ?? 0,
-      aguaAnalogico: list.find(s => s.id === 'agua')?.valor ?? 0,
-      ph: list.find(s => s.id === 'ph')?.valor ?? 0,
-      oxigeno: list.find(s => s.id === 'oxigeno')?.valor ?? 0,
-      turbidez: list.find(s => s.id === 'turbidez')?.valor ?? 0,
-      caudal: list.find(s => s.id === 'caudal')?.valor ?? 0,
-      presion: list.find(s => s.id === 'presion')?.valor ?? 0,
-      aire: list.find(s => s.id === 'aire')?.valor ?? 0,
-      sedimento: list.find(s => s.id === 'sedimento')?.valor ?? 0,
-      temp_liquido: list.find(s => s.id === 'temp_liquido')?.valor ?? 0
-    };
-
-    this.http.post(`${this.apiUrl()}/api/diagnostic`, payload, { headers: { 'bypass-tunnel-reminder': 'true' } }).subscribe({
-      next: (res) => this.aiDiagnostic.set(res),
-      error: () => {},
-    });
   }
 
   reiniciarVolumen(onSuccess: () => void, onError: () => void) {
