@@ -13,8 +13,8 @@
       <div class="flex items-center gap-2">
         @if (sensor.historial.length > 0) {
           <span class="font-sans font-bold tracking-widest uppercase text-[8px]"
-                [ngClass]="sensor.estado === 'anomalia' ? 'text-red-400 animate-pulse' : 'text-[#737373]'">
-            {{ sensor.estado === 'normal' ? 'OK' : sensor.estado === 'advertencia' ? 'WARN' : sensor.estado === 'anomalia' ? 'PICO' : 'ERR' }}
+                [ngClass]="(sensor.estado === 'anomalia' || sensor.estado === 'alerta') ? 'text-red-400 animate-pulse' : 'text-[#737373]'">
+            {{ sensor.estado === 'normal' ? 'OK' : sensor.estado === 'advertencia' ? 'WARN' : sensor.estado === 'alerta' ? 'CRIT' : sensor.estado === 'anomalia' ? 'PICO' : 'ERR' }}
           </span>
         }
         <span
