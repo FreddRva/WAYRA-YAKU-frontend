@@ -68,8 +68,8 @@ export class TelemetryStateService {
 
   private cargarHistorial() {
     this.http
-      .get<any[]>('http://localhost:8000/api/telemetry/history')
-      .pipe(timeout(1000))
+      .get<any[]>(`${this.apiUrl()}/api/telemetry/history`)
+      .pipe(timeout(5000))
       .subscribe({
         next: (history) => {
           const parsed = history.map((h) => ({
@@ -107,50 +107,31 @@ export class TelemetryStateService {
     this.subTelemetria?.unsubscribe();
     this.conectado.set(true);
 
-    // Iniciar peticiones a las placas (Productores)
-    this.pollEsp1();
-    this.pollEsp2();
-    this.pollEsp3();
+    // Iniciar peticiones a la nube (Consumidor) en lugar de consultar a las placas locales
+    this.pollBackend();
 
-    // Iniciar el renderizado de la UI (Consumidor)
-    // Esto asegura que Angular solo procese los gráficos 1 vez por segundo,
-    // eliminando por completo el lag de CPU por sobre-actualización.
     if (this.simInterval) clearInterval(this.simInterval);
     this.simInterval = setInterval(() => {
       this.updateState();
     }, this.intervaloMs() || 1000);
   }
 
-  private pollEsp1() {
+  private pollBackend() {
     if (!this.conectado()) return;
-    this.http.get<any>(`${this.apiUrl()}/proxy/esp/${this.ipEsp1()}`, { headers: { 'bypass-tunnel-reminder': 'true' } }).pipe(timeout(3000)).subscribe({
+    this.http.get<any>(`${this.apiUrl()}/api/telemetry/latest`).pipe(timeout(3000)).subscribe({
       next: (res) => { 
-        if (res) {
+        if (res && Object.keys(res).length > 0) {
+          // El backend nos devuelve un solo JSON con todos los datos combinados.
+          // Lo guardamos en lastRes1 para que updateState() lo tome y lo pinte.
           this.lastRes1 = res;
         }
       },
-      error: (err) => { 
-        setTimeout(() => this.pollEsp1(), this.intervaloMs() || 1000); 
+      error: () => { 
+        setTimeout(() => this.pollBackend(), this.intervaloMs() || 2000); 
       },
-      complete: () => { setTimeout(() => this.pollEsp1(), this.intervaloMs() || 1000); }
-    });
-  }
-
-  private pollEsp2() {
-    if (!this.conectado()) return;
-    this.http.get<any>(`${this.apiUrl()}/proxy/esp/${this.ipEsp2()}`, { headers: { 'bypass-tunnel-reminder': 'true' } }).pipe(timeout(3000)).subscribe({
-      next: (res) => { if (res) this.lastRes2 = res; },
-      error: () => { setTimeout(() => this.pollEsp2(), this.intervaloMs() || 1000); },
-      complete: () => { setTimeout(() => this.pollEsp2(), this.intervaloMs() || 1000); }
-    });
-  }
-
-  private pollEsp3() {
-    if (!this.conectado()) return;
-    this.http.get<any>(`${this.apiUrl()}/proxy/esp/${this.ipEsp3()}`, { headers: { 'bypass-tunnel-reminder': 'true' } }).pipe(timeout(3000)).subscribe({
-      next: (res) => { if (res) this.lastRes3 = res; },
-      error: () => { setTimeout(() => this.pollEsp3(), this.intervaloMs() || 1000); },
-      complete: () => { setTimeout(() => this.pollEsp3(), this.intervaloMs() || 1000); }
+      complete: () => { 
+        setTimeout(() => this.pollBackend(), this.intervaloMs() || 2000); 
+      }
     });
   }
 
