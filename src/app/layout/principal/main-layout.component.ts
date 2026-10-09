@@ -69,28 +69,33 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     const element = document.querySelector('main') as HTMLElement;
     if (!element) return;
     
-    // Add a temporary class to ensure it's captured properly
+    // Add a temporary background
     element.style.background = '#0a0a0a';
     
-    import('html2canvas').then(html2canvasModule => {
+    import('html-to-image').then(htmlToImage => {
       import('jspdf').then(jspdfModule => {
-        const html2canvas = html2canvasModule.default;
-        const jsPDF = jspdfModule.default;
-        
-        html2canvas(element, { 
-          scale: 2, 
-          useCORS: true, 
+        htmlToImage.toPng(element, { 
+          pixelRatio: 2,
           backgroundColor: '#0a0a0a' 
-        }).then(canvas => {
+        }).then(imgData => {
           element.style.background = ''; // reset
-          const imgData = canvas.toDataURL('image/png');
+          
           const JsPdfClass = (jspdfModule as any).jsPDF || jspdfModule.default;
           const pdf = new JsPdfClass('landscape', 'mm', 'a4');
           const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
           
-          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-          pdf.save(`WayraYaku_ReporteIA_${new Date().toISOString().split('T')[0]}.pdf`);
+          // Calcula el alto proporcional creando una imagen temporal para obtener sus dimensiones
+          const img = new Image();
+          img.onload = () => {
+            const pdfHeight = (img.height * pdfWidth) / img.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save(`WayraYaku_ReporteIA_${new Date().toISOString().split('T')[0]}.pdf`);
+          };
+          img.src = imgData;
+          
+        }).catch(err => {
+          console.error('Error generating PDF image', err);
+          element.style.background = ''; // reset on error
         });
       });
     });
