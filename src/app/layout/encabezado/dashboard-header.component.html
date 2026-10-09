@@ -9,30 +9,14 @@
     </h1>
   </div>
 
-  <div class="hidden md:flex flex-1 justify-center items-center gap-2 px-4">
-    <mat-icon class="text-[#a3a3a3] !text-[18px] !w-[18px] !h-[18px]">cloud</mat-icon>
-    <span class="font-mono text-sm text-[#f5f5f5]">24°C</span>
-    <span class="text-xs text-[#737373] uppercase tracking-wider">Nublado</span>
-  </div>
+
 
   <div class="flex items-center gap-3 shrink-0">
     <app-sampling-menu
       [intervaloMs]="intervaloMs"
       (intervaloChange)="intervaloCambiado.emit($event)"
     ></app-sampling-menu>
-    <app-wifi-menu
-      [conectado]="conectado"
-      [ipEsp1]="ipEsp1"
-      [ipEsp2]="ipEsp2"
-      [ipEsp3]="ipEsp3"
-      [fase1Activa]="fase1Activa"
-      [fase2Activa]="fase2Activa"
-      [fase3Activa]="fase3Activa"
-      [apiUrl]="apiUrl"
-      (ipSubmit)="ipGuardada.emit($event)"
-      (apiSubmit)="apiSubmit.emit($event)"
-    >
-    </app-wifi-menu>
+
 
     <div class="w-[1px] h-6 bg-[#262626]"></div>
 
