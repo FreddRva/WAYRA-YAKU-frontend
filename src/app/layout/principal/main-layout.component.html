@@ -54,16 +54,16 @@
       <!-- SIDEBAR COLUMN (Span 1 on XL) -->
       <aside class="xl:col-span-1 flex flex-col gap-6">
         <div class="eng-panel p-0 flex flex-col h-full overflow-hidden">
-          <div class="eng-panel-header px-5 pt-5 mb-0 border-b border-[#262626]">
-            <div class="flex items-center gap-2">
-              <mat-icon class="text-[#a3a3a3] text-[18px]">map</mat-icon>
-              <span class="text-sm font-medium text-[#f5f5f5]">Plano de Planta</span>
+          <div class="eng-panel-header px-5 pt-5 mb-0 border-b border-white/10">
+            <div class="flex items-center gap-3">
+              <mat-icon class="text-white/70 text-[20px]">map</mat-icon>
+              <span class="text-[16px] font-sans font-bold text-white/90 tracking-widest uppercase">Plano de Planta</span>
             </div>
             <div
-              class="flex items-center gap-1.5 px-2 py-1 bg-[#171717] rounded-full border border-[#262626]"
+              class="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase px-3 py-1 rounded-full border bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
             >
-              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-              <span class="text-[10px] font-mono text-[#a3a3a3]">EN VIVO</span>
+              <div class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></div>
+              <span>EN VIVO</span>
             </div>
           </div>
           <div class="flex-1 w-full relative">
@@ -74,16 +74,14 @@
     </div>
 
     <div class="w-full eng-panel p-0">
-      <div class="eng-panel-header px-5 pt-5 mb-0 border-b border-[#262626]">
+      <div class="eng-panel-header px-5 pt-5 mb-0 border-b border-white/10">
         <div class="flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full bg-[#3b82f6]"></div>
-          <span class="font-medium text-sm text-[#f5f5f5]">Registro de Telemetría</span>
+          <div class="w-1.5 h-6 rounded-full bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.6)]"></div>
+          <span class="text-[16px] font-sans font-bold text-white/90 tracking-widest uppercase">Registro de Telemetría</span>
         </div>
-        <div class="flex items-center gap-2 bg-[#171717] px-3 py-1 rounded-full">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#3b82f6] animate-pulse"></span>
-          <span class="text-xs font-mono text-[#a3a3a3]"
-            >{{ telemetry.totalMuestras() }} Registros</span
-          >
+        <div class="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase px-3 py-1 rounded-full border bg-white/5 border-white/10 text-white/70">
+          <span class="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)] animate-pulse"></span>
+          <span>{{ telemetry.totalMuestras() }} Registros</span>
         </div>
       </div>
       <div class="p-5 overflow-x-auto">

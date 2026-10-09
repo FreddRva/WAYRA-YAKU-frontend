@@ -1,5 +1,5 @@
 <div
-  class="sensor-card-v2 flex flex-col h-[130px] bg-[#050505] border border-[#262626] rounded-xl hover:border-[#404040] hover:bg-[#0a0a0a] transition-all duration-300 relative overflow-hidden group"
+  class="sensor-card-v2 flex flex-col h-[130px] premium-glass-card rounded-xl relative overflow-hidden group"
   [class]="'sensor-type--' + sensor.id"
   (click)="onClick()"
 >
@@ -27,8 +27,8 @@
     </div>
 
     <!-- Data Row -->
-    <div class="mt-3 flex items-baseline gap-1.5">
-      <span class="font-mono font-medium text-[#f5f5f5] tracking-tight leading-none text-3xl">{{ sensor.historial.length === 0 ? '--' : (sensor.valor | number: '1.1-1') }}</span>
+    <div class="mt-3 flex items-baseline gap-1.5 z-30 relative">
+      <span class="font-mono font-medium text-[#f5f5f5] text-neon-glow tracking-tight leading-none text-4xl" [style.color]="'var(--card-accent)'">{{ sensor.historial.length === 0 ? '--' : (sensor.valor | number: '1.1-1') }}</span>
       <span class="font-sans font-medium text-[#737373] text-xs">{{ sensor.unidad }}</span>
     </div>
   </div>

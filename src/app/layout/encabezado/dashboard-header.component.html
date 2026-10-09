@@ -1,10 +1,10 @@
 <div
-  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-2 min-h-[56px] w-[95%] max-w-[1200px] bg-[#0a0a0a]/80 backdrop-blur-md border border-[#262626] rounded-full text-[#f5f5f5] shadow-2xl"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-2 min-h-[56px] w-[90%] max-w-[1000px] premium-nav-glass rounded-full text-[#f5f5f5]"
 >
   <!-- Izquierda: Botón Menú + Título -->
   <div class="flex items-center gap-4 shrink-0">
-    <h1 class="font-medium text-xs sm:text-sm tracking-tight truncate flex items-center gap-3">
-      <img src="Escudo.png" alt="Logo UNSCH" class="w-15 h-15 object-contain" />
+    <h1 class="font-sans font-medium text-[10px] sm:text-xs tracking-wide text-white/90 truncate flex items-center gap-3">
+      <img src="Escudo.png" alt="Logo UNSCH" class="w-10 h-10 object-contain drop-shadow-md" />
       MONITOREO CONTINUO WAYRA YAKU-UNIVERSIDAD NACIONAL SAN CRISTOBAL DE HUAMANGA
     </h1>
   </div>
@@ -18,13 +18,13 @@
     ></app-sampling-menu>
 
 
-    <div class="w-[1px] h-6 bg-[#262626]"></div>
+
 
     <app-settings-menu [conectado]="conectado" (exportar)="exportar.emit()"></app-settings-menu>
 
     <div class="relative flex items-center">
       <button
-        class="text-[#a3a3a3] hover:text-[#f5f5f5] transition-colors flex items-center justify-center w-8 h-8 rounded-full hover:bg-[#171717]"
+        class="w-10 h-10 flex items-center justify-center rounded-lg bg-transparent hover:bg-white/10 text-white/70 hover:text-white transition-all outline-none"
       >
         <mat-icon class="!text-[20px] !w-[20px] !h-[20px]">notifications</mat-icon>
       </button>

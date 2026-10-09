@@ -123,8 +123,8 @@ export function buildChartOptions(sensor: SensorData, data: any[]): any {
       lineStyle: { width: 3, color: accentColor, shadowColor: hexToRgba(accentColor, 0.6), shadowBlur: 12 }, 
       areaStyle: { 
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: hexToRgba(accentColor, 0.4) }, 
-          { offset: 1, color: hexToRgba(accentColor, 0.0) }
+          { offset: 0, color: hexToRgba(accentColor, 0.6) }, 
+          { offset: 1, color: hexToRgba(accentColor, 0.05) }
         ]) 
       },
       markLine: {

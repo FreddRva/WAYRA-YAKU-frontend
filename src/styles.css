@@ -15,38 +15,124 @@
 }
 
 @layer components {
-  /* Engineering Panel */
+  /* Ultra-Premium Engineering Panel */
   .eng-panel {
-    @apply bg-[#0a0a0a] border border-[#262626] rounded-2xl p-5 text-[#f5f5f5] relative transition-colors duration-200 shadow-sm;
+    @apply bg-black/40 backdrop-blur-[30px] border transition-all duration-500 rounded-3xl p-6 text-[#f5f5f5] relative shadow-2xl;
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 
+      0 15px 35px -12px rgba(0, 0, 0, 0.6), 
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 1px 0 rgba(255, 255, 255, 0.01);
   }
   
   .eng-panel:hover {
-    @apply border-[#404040] shadow-md;
+    @apply bg-black/45;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 20px 40px -15px rgba(0, 0, 0, 0.8),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
   }
   
   /* Header for Panels */
   .eng-panel-header {
-    @apply flex items-center justify-between pb-3 mb-4 border-b border-[#262626];
+    @apply flex items-center justify-between pb-4 mb-5 border-b border-[#ffffff10];
   }
 
   /* Professional Buttons */
   .eng-btn {
-    @apply bg-transparent border border-[#404040] text-[#e5e5e5] text-xs font-medium px-4 py-2 hover:bg-[#171717] hover:border-[#525252] transition-colors flex items-center gap-2;
+    @apply bg-white/5 backdrop-blur-md border border-white/5 text-[#e5e5e5] text-xs font-semibold px-5 py-2 rounded-lg hover:bg-white/10 hover:border-white/15 transition-all duration-300 flex items-center gap-2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
   
   .eng-btn-primary {
-    @apply bg-[#171717] border border-[#3b82f6] text-[#60a5fa] text-xs font-medium px-4 py-2 hover:bg-[#3b82f6] hover:text-white transition-colors flex items-center gap-2;
+    @apply bg-blue-600/15 backdrop-blur-md border border-blue-500/30 text-blue-300 text-xs font-bold px-5 py-2 rounded-lg hover:bg-blue-600/25 hover:text-white hover:border-blue-400/50 transition-all duration-300 flex items-center gap-2;
   }
   
   .eng-badge {
-    @apply px-2 py-0.5 text-[10px] font-mono border tracking-wider uppercase;
+    @apply px-3 py-1 text-[10px] font-mono font-bold tracking-widest uppercase rounded-full border border-white/5 bg-white/5 backdrop-blur-sm;
+  }
+  
+  /* Ultra-Premium Glass Cards for Sensors */
+  .premium-glass-card {
+    @apply bg-black/30 backdrop-blur-[20px] border transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)];
+    border-color: rgba(255, 255, 255, 0.04);
+    box-shadow: 
+      0 8px 25px -10px rgba(0, 0, 0, 0.6), 
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  
+  /* Sheen effect - Softer */
+  .premium-glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -150%; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.03), transparent);
+    transform: skewX(-25deg);
+    transition: all 0.7s ease;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .premium-glass-card:hover::before {
+    left: 200%;
+  }
+  
+  .premium-glass-card:hover {
+    @apply bg-black/40 -translate-y-1;
+    border-color: var(--card-accent);
+    box-shadow: 
+      0 12px 30px -10px rgba(0, 0, 0, 0.8), 
+      0 0 15px -5px var(--card-accent),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Premium Nav Glass (Similar to Sensor Card) */
+  .premium-nav-glass {
+    @apply bg-black/30 backdrop-blur-[25px] border transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden relative;
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.6), 
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .premium-nav-glass::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -150%; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.04), transparent);
+    transform: skewX(-25deg);
+    transition: all 0.8s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .premium-nav-glass:hover::before {
+    left: 200%;
+  }
+
+  .premium-nav-glass:hover {
+    @apply bg-black/40 -translate-y-0.5;
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.8), 
+      0 0 20px -5px rgba(255, 255, 255, 0.1),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+  }
+  
+  /* No data glow */
+  .text-neon-glow {
+    text-shadow: none;
   }
 }
 
 body {
   margin: 0;
-  @apply text-[#f5f5f5] antialiased bg-[#000000] font-sans;
-  background-color: #050505;
+  @apply text-[#f5f5f5] antialiased font-sans;
+  background-color: #030303;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(20, 40, 80, 0.25), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(10, 50, 70, 0.20), transparent 40%);
+  background-attachment: fixed;
 }
 
 ::-webkit-scrollbar {

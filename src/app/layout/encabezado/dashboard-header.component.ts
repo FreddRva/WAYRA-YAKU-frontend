@@ -5,12 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SettingsMenuComponent } from './components/settings-menu.component';
 import { SamplingMenuComponent } from './components/sampling-menu.component';
-import { WifiMenuComponent } from './components/wifi-menu.component';
 
 @Component({
   selector: 'app-dashboard-header',
   standalone: true,
-  imports: [CommonModule, MatMenuModule, MatIconModule, MatButtonModule, SettingsMenuComponent, SamplingMenuComponent, WifiMenuComponent],
+  imports: [CommonModule, MatMenuModule, MatIconModule, MatButtonModule, SettingsMenuComponent, SamplingMenuComponent],
   templateUrl: './dashboard-header.component.html',
 })
 export class DashboardHeaderComponent {

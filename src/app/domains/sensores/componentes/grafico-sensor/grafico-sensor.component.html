@@ -1,7 +1,7 @@
-<div class="relative flex flex-col flex-1 bg-[#050505] border border-white/5 rounded-2xl p-4 min-h-[350px]">
+<div class="relative flex flex-col flex-1 bg-black/40 backdrop-blur-[30px] border border-white/5 rounded-3xl p-5 min-h-[350px] shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)]">
   
   <!-- Tool Bar -->
-  <div class="absolute top-4 left-6 z-10 flex items-center gap-1.5 bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-xl p-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.5)]" (click)="$event.stopPropagation()">
+  <div class="absolute top-6 left-6 z-10 flex items-center gap-1.5 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.15)]" (click)="$event.stopPropagation()">
     
     <button (click)="togglePause($event)" class="w-8 h-8 flex items-center justify-center rounded-lg transition-all" [ngClass]="isPaused ? 'bg-amber-500/20 text-amber-500 border border-amber-500/50' : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'">
       <svg *ngIf="!isPaused" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>

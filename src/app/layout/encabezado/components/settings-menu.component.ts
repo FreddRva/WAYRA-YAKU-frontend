@@ -11,9 +11,9 @@ import { LucideAngularModule } from 'lucide-angular';
       <button 
         (click)="toggleMenu($event)"
         aria-label="Menú de configuración" 
-        class="ml-2 sm:ml-4 w-12 h-12 min-w-[48px] min-h-[48px] flex items-center justify-center bg-emerald-500/10 text-emerald-400 rounded-full hover:bg-emerald-500/20 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all border border-emerald-500/30 shrink-0 cursor-pointer outline-none"
+        class="w-10 h-10 flex items-center justify-center rounded-lg bg-transparent hover:bg-white/10 text-white/70 hover:text-white transition-all cursor-pointer outline-none"
       >
-        <lucide-icon name="settings" class="w-6 h-6 drop-shadow-sm"></lucide-icon>
+        <lucide-icon name="settings" class="w-5 h-5"></lucide-icon>
       </button>
 
       <div *ngIf="menuOpen"

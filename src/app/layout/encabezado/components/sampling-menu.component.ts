@@ -11,9 +11,9 @@ import { LucideAngularModule } from 'lucide-angular';
       <!-- Botón Disparador -->
       <button 
         (click)="toggleMenu($event)"
-        class="w-10 h-10 flex items-center justify-center rounded-xl bg-transparent hover:bg-white/5 transition-colors border-none cursor-pointer outline-none"
+        class="w-10 h-10 flex items-center justify-center rounded-lg bg-transparent hover:bg-white/10 text-white/70 hover:text-white transition-all cursor-pointer outline-none"
       >
-        <lucide-icon name="zap" class="w-[28px] h-[28px] text-yellow-300 drop-shadow-[0_0_8px_rgba(253,224,71,0.6)] animate-pulse" title="Velocidad de Muestreo"></lucide-icon>
+        <lucide-icon name="zap" class="w-5 h-5" title="Velocidad de Muestreo"></lucide-icon>
       </button>
       
       <!-- Menú Flotante (Custom Dropdown) -->
