@@ -50,7 +50,46 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   }
 
   exportarCSV() {
-    // TODO: Implementar exportación CSV
+    const logs = this.telemetry.logsRecientes();
+    if (!logs.length) return;
+    
+    const header = Object.keys(logs[0]).join(',') + '\n';
+    const rows = logs.map(l => Object.values(l).join(',')).join('\n');
+    
+    const blob = new Blob([header + rows], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `WayraYaku_Data_${new Date().toISOString()}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  exportarPDF() {
+    import('jspdf').then(jsPDF => {
+      import('html2canvas').then(html2canvas => {
+        const element = document.querySelector('main') as HTMLElement;
+        if (!element) return;
+        
+        // Add a temporary class to ensure it's captured properly
+        element.style.background = '#0a0a0a';
+        
+        html2canvas.default(element, { 
+          scale: 2, 
+          useCORS: true, 
+          backgroundColor: '#0a0a0a' 
+        }).then(canvas => {
+          element.style.background = ''; // reset
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF.default('landscape', 'mm', 'a4');
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+          
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save(`WayraYaku_ReporteIA_${new Date().toISOString().split('T')[0]}.pdf`);
+        });
+      });
+    });
   }
 
   abrirMapaCamara(nodeId: number) {

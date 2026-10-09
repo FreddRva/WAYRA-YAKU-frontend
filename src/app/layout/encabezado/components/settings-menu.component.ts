@@ -52,11 +52,19 @@ import { LucideAngularModule } from 'lucide-angular';
 
         <div class="h-px w-full bg-white/10 mb-3"></div>
 
+        <!-- Exportar PDF -->
+        <div class="flex flex-col mb-2">
+          <button (click)="ejecutarExportarPDF()" class="w-full h-11 bg-white/5 text-white rounded-xl flex items-center justify-center gap-2 hover:bg-white/10 transition-colors shadow-sm border border-white/10 cursor-pointer outline-none">
+            <lucide-icon name="file-text" class="w-5 h-5 text-white/70"></lucide-icon>
+            <span class="text-[14px] font-bold tracking-wide">Exportar PDF (IA)</span>
+          </button>
+        </div>
+
         <!-- Exportar CSV -->
         <div class="flex flex-col">
-          <button (click)="ejecutarExportar()" class="w-full h-11 bg-white/5 text-white rounded-xl flex items-center justify-center gap-2 hover:bg-white/10 transition-colors shadow-sm border border-white/10 cursor-pointer outline-none">
+          <button (click)="ejecutarExportarCSV()" class="w-full h-11 bg-white/5 text-white rounded-xl flex items-center justify-center gap-2 hover:bg-white/10 transition-colors shadow-sm border border-white/10 cursor-pointer outline-none">
             <lucide-icon name="download-cloud" class="w-5 h-5 text-white/70"></lucide-icon>
-            <span class="text-[14px] font-bold tracking-wide">Exportar Datos</span>
+            <span class="text-[14px] font-bold tracking-wide">Exportar CSV</span>
           </button>
         </div>
       </div>
@@ -66,6 +74,7 @@ import { LucideAngularModule } from 'lucide-angular';
 export class SettingsMenuComponent {
   @Input() conectado: boolean = false;
   @Output() exportar = new EventEmitter<void>();
+  @Output() exportarPDF = new EventEmitter<void>();
 
   menuOpen = false;
 
@@ -87,8 +96,13 @@ export class SettingsMenuComponent {
     event.stopPropagation();
   }
 
-  ejecutarExportar() {
+  ejecutarExportarCSV() {
     this.exportar.emit();
+    this.menuOpen = false;
+  }
+
+  ejecutarExportarPDF() {
+    this.exportarPDF.emit();
     this.menuOpen = false;
   }
 }

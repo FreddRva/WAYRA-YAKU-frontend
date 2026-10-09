@@ -23,10 +23,12 @@ export class DashboardHeaderComponent {
   @Input() fase1Activa: boolean = false;
   @Input() fase2Activa: boolean = false;
   @Input() fase3Activa: boolean = false;
+  @Input() aiDiagnostic: any = null;
 
   @Output() intervaloCambiado = new EventEmitter<number>();
   @Output() ipGuardada = new EventEmitter<{ esp: number, ip: string }>();
   @Output() exportar = new EventEmitter<void>();
+  @Output() exportarPDF = new EventEmitter<void>();
   @Output() ipSubmit = new EventEmitter<{ esp: number, ip: string }>();
   @Output() apiSubmit = new EventEmitter<string>();
   @Output() intervaloChange = new EventEmitter<number>();

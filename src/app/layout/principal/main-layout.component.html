@@ -6,10 +6,12 @@
     [ipEsp2]="telemetry.ipEsp2()"
     [ipEsp3]="telemetry.ipEsp3()"
     [apiUrl]="telemetry.apiUrl()"
+    [aiDiagnostic]="telemetry.aiDiagnostic()"
     (intervaloCambiado)="cambiarIntervalo($event)"
     (ipGuardada)="guardarIp($event)"
     (apiSubmit)="guardarApi($event)"
     (exportar)="exportarCSV()"
+    (exportarPDF)="exportarPDF()"
   >
   </app-dashboard-header>
 
@@ -34,7 +36,7 @@
           class="w-full"
           [title]="'Fase 02: Filtrado Principal'"
           [phaseNumber]="2"
-          [conectado]="false"
+          [conectado]="telemetry.conectado()"
           [sensores]="telemetry.sensoresFase2()"
           (onAbrirEstadisticas)="abrirEstadisticas($event)"
         >
@@ -44,7 +46,7 @@
           class="w-full"
           [title]="'Fase 03: Post-Filtración'"
           [phaseNumber]="3"
-          [conectado]="false"
+          [conectado]="telemetry.conectado()"
           [sensores]="telemetry.sensoresFase3()"
           (onAbrirEstadisticas)="abrirEstadisticas($event)"
         >

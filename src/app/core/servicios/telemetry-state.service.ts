@@ -24,10 +24,15 @@ export class TelemetryStateService {
   readonly logsRecientes = signal<TelemetriaLog[]>([]);
   readonly aiDiagnostic = signal<any>(null);
 
-  // Agrupación (Fases)
-  readonly sensoresFase1 = computed(() => this.sensores().filter(s => ['temperatura', 'humedad', 'agua', 'suelo'].includes(s.id)));
-  readonly sensoresFase2 = computed(() => this.sensores().filter(s => ['tds', 'caudal', 'ph', 'turbidez'].includes(s.id)));
-  readonly sensoresFase3 = computed(() => this.sensores().filter(s => ['presion', 'aire', 'sedimento', 'temp_liquido'].includes(s.id)));
+  readonly sensoresFase1 = computed(() =>
+    this.sensores().filter((s) => ['temperatura', 'humedad', 'agua', 'suelo'].includes(s.id)),
+  );
+  readonly sensoresFase2 = computed(() =>
+    this.sensores().filter((s) => ['tds', 'caudal', 'ph', 'turbidez'].includes(s.id)),
+  );
+  readonly sensoresFase3 = computed(() =>
+    this.sensores().filter((s) => ['presion', 'aire', 'sedimento', 'temp_liquido'].includes(s.id)),
+  );
 
   readonly fase1Activa = computed(() => this.conectado() && this.sensoresFase1().length > 0);
   readonly fase2Activa = computed(() => this.conectado() && this.sensoresFase2().length > 0);
@@ -39,7 +44,9 @@ export class TelemetryStateService {
   readonly apiUrl = signal(this.getApiUrl());
 
   private getApiUrl(): string {
-    return typeof localStorage !== 'undefined' ? (localStorage.getItem('api_url') || 'https://wayra-yaku-backend.onrender.com') : 'https://wayra-yaku-backend.onrender.com';
+    return typeof localStorage !== 'undefined'
+      ? localStorage.getItem('api_url') || 'https://wayra-yaku-backend.onrender.com'
+      : 'https://wayra-yaku-backend.onrender.com';
   }
 
   setApiUrl(url: string) {
@@ -104,7 +111,6 @@ export class TelemetryStateService {
     this.subTelemetria?.unsubscribe();
     this.conectado.set(true);
 
-    // Iniciar peticiones a la nube (Consumidor) en lugar de consultar a las placas locales
     this.pollBackend();
 
     if (this.simInterval) clearInterval(this.simInterval);
@@ -115,25 +121,28 @@ export class TelemetryStateService {
 
   private pollBackend() {
     if (!this.conectado()) return;
-    this.http.get<any>(`${this.apiUrl()}/api/telemetry/latest`).pipe(timeout(3000)).subscribe({
-      next: (res) => { 
-        if (res && Object.keys(res).length > 0) {
-          this.lastRes1 = res;
-          this.aiDiagnostic.set({
-            is_anomaly: res.is_anomaly,
-            anomaly_score: res.anomaly_score,
-            status: res.status,
-            anomalous_sensors: res.anomalous_sensors
-          });
-        }
-      },
-      error: () => { 
-        setTimeout(() => this.pollBackend(), this.intervaloMs() || 2000); 
-      },
-      complete: () => { 
-        setTimeout(() => this.pollBackend(), this.intervaloMs() || 2000); 
-      }
-    });
+    this.http
+      .get<any>(`${this.apiUrl()}/api/telemetry/latest`)
+      .pipe(timeout(3000))
+      .subscribe({
+        next: (res) => {
+          if (res && Object.keys(res).length > 0) {
+            this.lastRes1 = res;
+            this.aiDiagnostic.set({
+              is_anomaly: res.is_anomaly,
+              anomaly_score: res.anomaly_score,
+              status: res.status,
+              anomalous_sensors: res.anomalous_sensors,
+            });
+          }
+        },
+        error: () => {
+          setTimeout(() => this.pollBackend(), this.intervaloMs() || 2000);
+        },
+        complete: () => {
+          setTimeout(() => this.pollBackend(), this.intervaloMs() || 2000);
+        },
+      });
   }
 
   private updateState() {
@@ -144,7 +153,7 @@ export class TelemetryStateService {
       const res3 = this.lastRes3;
 
       const caudalActual = res1?.caudal ?? 0;
-      
+
       const pkg: any = {
         timestamp: now,
         temperatura: res1?.temperatura ?? 0,
@@ -159,17 +168,18 @@ export class TelemetryStateService {
         temp_liquido: res1?.temp_liquido ?? 0,
         aguaAnalogico: res1?.aguaAnalogico ?? 0,
         caudalLMin: caudalActual,
-        volumenLitros: this.volumenTotalLitros() + (caudalActual / 60)
+        volumenLitros: this.volumenTotalLitros() + caudalActual / 60,
       };
 
       this.ultimaActualizacion.set(pkg.timestamp);
       this.totalMuestras.update((n) => n + 1);
       this.volumenTotalLitros.set(pkg.volumenLitros);
-      this.sensores.update((l) => procesarSensores(l, pkg, this.aiDiagnostic()?.anomalous_sensors || []));
+      this.sensores.update((l) =>
+        procesarSensores(l, pkg, this.aiDiagnostic()?.anomalous_sensors || []),
+      );
 
-      // Leer los valores ya procesados (nunca serán undefined) para evitar que la tabla HTML crashee
       const list = this.sensores();
-      const valOf = (id: string) => list.find(s => s.id === id)?.valor ?? 0;
+      const valOf = (id: string) => list.find((s) => s.id === id)?.valor ?? 0;
 
       const logs = this.logsRecientes();
       if (logs.length === 0 || now.getTime() - logs[0].hora.getTime() >= 900) {
@@ -193,9 +203,7 @@ export class TelemetryStateService {
         };
         this.logsRecientes.update((l) => [newLog, ...l].slice(0, 100));
       }
-    } catch (ex) {
-      // Ignorar error de procesamiento
-    }
+    } catch (ex) {}
   }
 
   reiniciarVolumen(onSuccess: () => void, onError: () => void) {
