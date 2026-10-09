@@ -1,0 +1,6 @@
+/* Overrides mínimos para Angular Material Menu */
+::ng-deep .mat-mdc-menu-panel {
+  min-width: 320px !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+}

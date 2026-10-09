@@ -1,0 +1,62 @@
+/* Definición de Acentos de Sensores según Paleta Dark */
+.sensor-card-v2 {
+  --card-accent: #38bdf8;
+  --card-accent-bg: rgba(56, 189, 248, 0.1);
+}
+.sensor-type--temperatura {
+  --card-accent: #fb923c; /* Orange */
+  --card-accent-bg: rgba(251, 146, 60, 0.1);
+}
+.sensor-type--humedad {
+  --card-accent: #34d399; /* Emerald */
+  --card-accent-bg: rgba(52, 211, 153, 0.1);
+}
+.sensor-type--tds {
+  --card-accent: #a78bfa; /* Violet */
+  --card-accent-bg: rgba(167, 139, 250, 0.1);
+}
+.sensor-type--ph {
+  --card-accent: #f472b6; /* Pink */
+  --card-accent-bg: rgba(244, 114, 182, 0.1);
+}
+.sensor-type--oxigeno {
+  --card-accent: #60a5fa; /* Blue */
+  --card-accent-bg: rgba(96, 165, 250, 0.1);
+}
+.sensor-type--presion {
+  --card-accent: #818cf8; /* Indigo */
+  --card-accent-bg: rgba(129, 140, 248, 0.1);
+}
+.sensor-type--aire {
+  --card-accent: #2dd4bf; /* Teal */
+  --card-accent-bg: rgba(45, 212, 191, 0.1);
+}
+.sensor-type--turbidez {
+  --card-accent: #eab308; /* Yellow */
+  --card-accent-bg: rgba(234, 179, 8, 0.1);
+}
+.sensor-type--agua {
+  --card-accent: #38bdf8; /* Sky Blue */
+  --card-accent-bg: rgba(56, 189, 248, 0.1);
+}
+.sensor-type--caudal {
+  --card-accent: #f43f5e; /* Rose */
+  --card-accent-bg: rgba(244, 63, 94, 0.1);
+}
+.sensor-type--sedimento {
+  --card-accent: #d97706; /* Amber */
+  --card-accent-bg: rgba(217, 119, 6, 0.1);
+}
+.sensor-type--temp_liquido {
+  --card-accent: #ef4444; /* Red */
+  --card-accent-bg: rgba(239, 68, 68, 0.1);
+}
+
+.sensor-icon-circle {
+  background: var(--card-accent-bg);
+  color: var(--card-accent);
+}
+
+.live-dot-pulse {
+  animation: pulso-led 1.5s infinite;
+}

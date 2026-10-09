@@ -1,0 +1,45 @@
+<div class="max-h-[350px] overflow-y-auto w-full">
+  <table class="w-full text-left border-collapse whitespace-nowrap">
+    <thead class="sticky top-0 bg-[#0a0a0a] z-10 shadow-[0_1px_0_0_#262626]">
+      <tr class="text-[10px] uppercase font-medium text-[#737373] tracking-widest">
+        <th class="py-3 px-4 font-normal">HORA</th>
+        <th class="py-3 px-4 font-normal">TEMP</th>
+        <th class="py-3 px-4 font-normal">HUMEDAD</th>
+        <th class="py-3 px-4 font-normal">PH</th>
+        <th class="py-3 px-4 font-normal">O2 (mg/L)</th>
+        <th class="py-3 px-4 font-normal">PRESIÓN</th>
+        <th class="py-3 px-4 font-normal">AIRE (PPM)</th>
+        <th class="py-3 px-4 font-normal">TDS (PPM)</th>
+        <th class="py-3 px-4 font-normal">NIVEL</th>
+        <th class="py-3 px-4 font-normal">CAUDAL</th>
+        <th class="py-3 px-4 font-normal">VOLUMEN</th>
+      </tr>
+    </thead>
+    <tbody class="text-xs text-[#d4d4d4] divide-y divide-[#262626]/50">
+      @for (log of logs; track log.hora.getTime()) {
+        <tr class="hover:bg-[#171717]/80 transition-colors">
+          <td class="py-3 px-4 text-[#737373] font-mono">{{ log.hora | date:'HH:mm:ss' }}</td>
+          <td class="py-3 px-4 text-[#fb923c] font-mono">{{ log.temperatura | number:'1.1-1' }}°</td>
+          <td class="py-3 px-4 text-[#4ade80] font-mono">{{ log.humedad | number:'1.1-1' }}%</td>
+          <td class="py-3 px-4 font-mono">{{ log.ph | number:'1.1-2' }}</td>
+          <td class="py-3 px-4 font-mono">{{ log.oxigeno | number:'1.1-2' }}</td>
+          <td class="py-3 px-4 font-mono">{{ log.presion | number:'1.0-1' }}</td>
+          <td class="py-3 px-4 font-mono">{{ log.aire }}</td>
+          <td class="py-3 px-4 text-[#c084fc] font-mono">{{ log.tds | number:'1.1-1' }}</td>
+          <td class="py-3 px-4 font-mono">{{ log.aguaAnalogico }}</td>
+          <td class="py-3 px-4 text-[#38bdf8] font-mono">{{ log.caudal | number:'1.2-2' }} L/m</td>
+          <td class="py-3 px-4 text-[#38bdf8] font-mono font-medium">{{ log.volumenLitros | number:'1.3-3' }} L</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="11" class="py-12 text-center text-[#737373]">
+            <div class="flex flex-col items-center justify-center gap-2">
+              <mat-icon class="text-[#404040]">hourglass_empty</mat-icon>
+              <span class="text-[11px] uppercase tracking-widest font-medium">Esperando flujos de datos...</span>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

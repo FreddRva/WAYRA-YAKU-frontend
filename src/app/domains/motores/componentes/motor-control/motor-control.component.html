@@ -1,0 +1,33 @@
+<div class="flex items-center justify-center w-full">
+  <div class="grid grid-cols-3 grid-rows-3 gap-3 p-5 bg-[#0a0a0a] rounded-full border border-[#262626]">
+    <div></div>
+    <button class="w-12 h-12 rounded-full flex items-center justify-center bg-[#171717] border border-[#262626] text-[#a3a3a3] transition-all hover:bg-[#262626] hover:text-[#f5f5f5] active:scale-95" 
+            [ngClass]="{'bg-[#3b82f6]/20 text-[#3b82f6] border-[#3b82f6]/50': comandoActivo() === 'arriba'}"
+            (click)="mover('arriba')" matTooltip="Arriba (W)">
+      <mat-icon>keyboard_arrow_up</mat-icon>
+    </button>
+    <div></div>
+
+    <button class="w-12 h-12 rounded-full flex items-center justify-center bg-[#171717] border border-[#262626] text-[#a3a3a3] transition-all hover:bg-[#262626] hover:text-[#f5f5f5] active:scale-95" 
+            [ngClass]="{'bg-[#3b82f6]/20 text-[#3b82f6] border-[#3b82f6]/50': comandoActivo() === 'izquierda'}"
+            (click)="mover('izquierda')" matTooltip="Izquierda (A)">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <div class="w-12 h-12 rounded-full flex items-center justify-center bg-[#0a0a0a] border border-[#262626]">
+      <span class="w-2.5 h-2.5 rounded-full" [ngClass]="comandoActivo() ? 'bg-[#3b82f6] shadow-[0_0_10px_#3b82f6]' : 'bg-[#404040]'"></span>
+    </div>
+    <button class="w-12 h-12 rounded-full flex items-center justify-center bg-[#171717] border border-[#262626] text-[#a3a3a3] transition-all hover:bg-[#262626] hover:text-[#f5f5f5] active:scale-95" 
+            [ngClass]="{'bg-[#3b82f6]/20 text-[#3b82f6] border-[#3b82f6]/50': comandoActivo() === 'derecha'}"
+            (click)="mover('derecha')" matTooltip="Derecha (D)">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+
+    <div></div>
+    <button class="w-12 h-12 rounded-full flex items-center justify-center bg-[#171717] border border-[#262626] text-[#a3a3a3] transition-all hover:bg-[#262626] hover:text-[#f5f5f5] active:scale-95" 
+            [ngClass]="{'bg-[#3b82f6]/20 text-[#3b82f6] border-[#3b82f6]/50': comandoActivo() === 'abajo'}"
+            (click)="mover('abajo')" matTooltip="Abajo (S)">
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+    <div></div>
+  </div>
+</div>

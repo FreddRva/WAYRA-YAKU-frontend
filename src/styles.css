@@ -1,3 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
-@import 'tailwindcss';
+@theme {
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --color-surface-dark: #0a0a0a;
+  --color-surface-hover: #171717;
+  --color-border-subtle: #262626;
+  --color-border-focus: #3b82f6;
+  --color-text-main: #f5f5f5;
+  --color-text-muted: #a3a3a3;
+  --color-accent: #3b82f6;
+}
+
+@layer components {
+  /* Engineering Panel */
+  .eng-panel {
+    @apply bg-[#0a0a0a] border border-[#262626] rounded-2xl p-5 text-[#f5f5f5] relative transition-colors duration-200 shadow-sm;
+  }
+  
+  .eng-panel:hover {
+    @apply border-[#404040] shadow-md;
+  }
+  
+  /* Header for Panels */
+  .eng-panel-header {
+    @apply flex items-center justify-between pb-3 mb-4 border-b border-[#262626];
+  }
+
+  /* Professional Buttons */
+  .eng-btn {
+    @apply bg-transparent border border-[#404040] text-[#e5e5e5] text-xs font-medium px-4 py-2 hover:bg-[#171717] hover:border-[#525252] transition-colors flex items-center gap-2;
+  }
+  
+  .eng-btn-primary {
+    @apply bg-[#171717] border border-[#3b82f6] text-[#60a5fa] text-xs font-medium px-4 py-2 hover:bg-[#3b82f6] hover:text-white transition-colors flex items-center gap-2;
+  }
+  
+  .eng-badge {
+    @apply px-2 py-0.5 text-[10px] font-mono border tracking-wider uppercase;
+  }
+}
+
+body {
+  margin: 0;
+  @apply text-[#f5f5f5] antialiased bg-[#000000] font-sans;
+  background-color: #050505;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+  border-left: 1px solid #171717;
+}
+::-webkit-scrollbar-thumb {
+  background: #404040;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #525252;
+}
+
+/* Angular Material Dark Premium Menu Override */
+.custom-premium-menu,
+.custom-premium-menu.mat-mdc-menu-panel,
+.custom-premium-menu .mat-mdc-menu-content,
+.custom-premium-menu .mdc-menu__surface,
+.custom-premium-menu .mdc-list,
+.cdk-overlay-pane .custom-premium-menu {
+  --mat-menu-container-color: #0a0a0a !important;
+  --mdc-menu-container-color: #0a0a0a !important;
+  --mdc-elevated-surface-container-color: #0a0a0a !important;
+  background-color: #0a0a0a !important;
+  background: #0a0a0a !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.custom-premium-menu.mat-mdc-menu-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
+  overflow: hidden !important;
+}
+
+/* For older Material versions just in case */
+.custom-premium-menu.mat-menu-panel,
+.custom-premium-menu .mat-menu-content {
+  background: #0a0a0a !important;
+  background-color: #0a0a0a !important;
+  padding: 0 !important;
+}
+
+.menu-backdrop {
+  background: transparent !important;
+}
