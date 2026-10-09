@@ -88,7 +88,7 @@
   
   /* Premium Nav Glass (Similar to Sensor Card) */
   .premium-nav-glass {
-    @apply bg-black/30 backdrop-blur-[25px] border transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden relative;
+    @apply bg-black/30 backdrop-blur-[25px] border transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] relative;
     border-color: rgba(255, 255, 255, 0.05);
     box-shadow: 
       0 8px 32px rgba(0, 0, 0, 0.6), 
