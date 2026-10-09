@@ -6,7 +6,7 @@ import { SENSOR_REPOSITORY_TOKEN } from './core/interfaces/sensor.repository.int
 import { SensorRepositoryImpl } from './infrastructure/repositorios/sensor.repository.impl';
 import { MOTOR_REPOSITORY_TOKEN } from './core/interfaces/motor.repository.interface';
 import { MotorRepositoryImpl } from './infrastructure/repositorios/motor.repository.impl';
-import { LucideAngularModule, Wifi, Router, Save, Check, Cloud, Bell, Settings, History, Zap, Gauge, Timer, RefreshCw, Power, DownloadCloud, Play, Pause, ZoomIn, ZoomOut, RotateCcw, Camera } from 'lucide-angular';
+import { LucideAngularModule, Wifi, Router, Save, Check, Cloud, Bell, Settings, History, Zap, Gauge, Timer, RefreshCw, Power, DownloadCloud, Play, Pause, ZoomIn, ZoomOut, RotateCcw, Camera, FileText } from 'lucide-angular';
 
 import { routes } from './app.routes';
 
@@ -18,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     { provide: SENSOR_REPOSITORY_TOKEN, useClass: SensorRepositoryImpl },
     { provide: MOTOR_REPOSITORY_TOKEN, useClass: MotorRepositoryImpl },
-    importProvidersFrom(LucideAngularModule.pick({ Wifi, Router, Save, Check, Cloud, Bell, Settings, History, Zap, Gauge, Timer, RefreshCw, Power, DownloadCloud, Play, Pause, ZoomIn, ZoomOut, RotateCcw, Camera }))
+    importProvidersFrom(LucideAngularModule.pick({ Wifi, Router, Save, Check, Cloud, Bell, Settings, History, Zap, Gauge, Timer, RefreshCw, Power, DownloadCloud, Play, Pause, ZoomIn, ZoomOut, RotateCcw, Camera, FileText }))
   ]
 };
