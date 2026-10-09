@@ -74,7 +74,7 @@ export class TelemetryStateService {
             temperatura: h.temperatura,
             humedad: h.humedad,
             ph: h.ph || 7,
-            oxigeno: h.oxigeno || 0,
+            suelo: h.suelo || 0,
             presion: h.presion || 0,
             aire: h.aire || 0,
             tds: h.tds,

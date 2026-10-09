@@ -41,7 +41,7 @@ export class SensorRepositoryImpl implements ISensorRepository {
       temperatura: typeof res.temperatura === 'number' ? res.temperatura : 0,
       humedad: typeof res.humedad === 'number' ? res.humedad : 0,
       ph: typeof res.ph === 'number' ? res.ph : 0,
-      oxigeno: typeof res.oxigeno === 'number' ? res.oxigeno : 0,
+      suelo: typeof res.suelo === 'number' ? res.suelo : 0,
       presion: typeof res.presion === 'number' ? res.presion : 0,
       aire: typeof res.aire === 'number' ? res.aire : 0,
       tds: typeof res.tds === 'number' ? res.tds : 0,

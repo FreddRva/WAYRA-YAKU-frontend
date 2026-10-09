@@ -47,7 +47,7 @@ export interface TelemetriaPaquete {
   temperatura: number;       // DHT22 (°C)
   humedad: number;           // DHT22 (%)
   ph: number;                // Sensor de pH
-  oxigeno: number;           // Sensor de Oxígeno
+  suelo: number;           // Sensor de Suelo
   presion: number;           // Sensor de Presión
   aire: number;              // Sensor de Aire
   tds: number;               // TDS Meter V1.0 (ppm)
