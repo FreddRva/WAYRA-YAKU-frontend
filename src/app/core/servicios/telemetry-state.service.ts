@@ -25,8 +25,8 @@ export class TelemetryStateService {
   readonly aiDiagnostic = signal<any>(null);
 
   // Agrupación (Fases)
-  readonly sensoresFase1 = computed(() => this.sensores().filter(s => ['temperatura', 'humedad', 'tds', 'agua', 'suelo'].includes(s.id)));
-  readonly sensoresFase2 = computed(() => this.sensores().filter(s => ['caudal', 'ph', 'turbidez'].includes(s.id)));
+  readonly sensoresFase1 = computed(() => this.sensores().filter(s => ['temperatura', 'humedad', 'agua', 'suelo'].includes(s.id)));
+  readonly sensoresFase2 = computed(() => this.sensores().filter(s => ['tds', 'caudal', 'ph', 'turbidez'].includes(s.id)));
   readonly sensoresFase3 = computed(() => this.sensores().filter(s => ['presion', 'aire', 'sedimento', 'temp_liquido'].includes(s.id)));
 
   readonly fase1Activa = computed(() => this.conectado() && this.sensoresFase1().length > 0);
