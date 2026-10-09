@@ -25,8 +25,8 @@ export class TelemetryStateService {
   readonly aiDiagnostic = signal<any>(null);
 
   // Agrupación (Fases)
-  readonly sensoresFase1 = computed(() => this.sensores().filter(s => ['temperatura', 'humedad', 'tds', 'agua'].includes(s.id)));
-  readonly sensoresFase2 = computed(() => this.sensores().filter(s => ['caudal', 'ph', 'oxigeno', 'turbidez'].includes(s.id)));
+  readonly sensoresFase1 = computed(() => this.sensores().filter(s => ['temperatura', 'humedad', 'tds', 'agua', 'suelo'].includes(s.id)));
+  readonly sensoresFase2 = computed(() => this.sensores().filter(s => ['caudal', 'ph', 'turbidez'].includes(s.id)));
   readonly sensoresFase3 = computed(() => this.sensores().filter(s => ['presion', 'aire', 'sedimento', 'temp_liquido'].includes(s.id)));
 
   readonly fase1Activa = computed(() => this.conectado() && this.sensoresFase1().length > 0);
@@ -150,7 +150,7 @@ export class TelemetryStateService {
         temperatura: res1?.temperatura ?? 0,
         humedad: res1?.humedad ?? 0,
         ph: res1?.ph ?? 0,
-        oxigeno: res1?.oxigeno ?? 0,
+        suelo: res1?.suelo ?? 0,
         presion: res1?.presion ?? 0,
         aire: res1?.aire ?? 0,
         tds: res1?.tds ?? 0,
@@ -178,7 +178,7 @@ export class TelemetryStateService {
           temperatura: valOf('temperatura'),
           humedad: valOf('humedad'),
           ph: valOf('ph'),
-          oxigeno: valOf('oxigeno'),
+          suelo: valOf('suelo'),
           presion: valOf('presion'),
           aire: valOf('aire'),
           tds: valOf('tds'),

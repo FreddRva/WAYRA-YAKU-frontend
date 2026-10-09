@@ -4,7 +4,7 @@ export const INITIAL_SENSORS: SensorData[] = [
   { id: 'temperatura', nombre: 'Temperatura Ambiente', subtitulo: 'Sensor Digital DHT22 (Pin 4)', valor: 0, unidad: '°C', icono: 'thermostat', min: 0, max: 60, estado: 'advertencia', historial: [], minimo: 0, maximo: 0, promedio: 0, tendencia: 'estable' },
   { id: 'humedad', nombre: 'Humedad Relativa', subtitulo: 'Sensor Digital DHT22 (Pin 4)', valor: 0, unidad: '%', icono: 'water_drop', min: 0, max: 100, estado: 'advertencia', historial: [], minimo: 0, maximo: 0, promedio: 0, tendencia: 'estable' },
   { id: 'ph', nombre: 'Nivel de pH', subtitulo: 'Sensor de pH (Pin 34)', valor: 7, unidad: 'pH', icono: 'science', min: 0, max: 14, estado: 'advertencia', historial: [], minimo: 0, maximo: 0, promedio: 0, tendencia: 'estable' },
-  { id: 'oxigeno', nombre: 'Oxígeno Disuelto', subtitulo: 'Sensor de Oxígeno (Pin 35)', valor: 0, unidad: 'mg/L', icono: 'air', min: 0, max: 20, estado: 'advertencia', historial: [], minimo: 0, maximo: 0, promedio: 0, tendencia: 'estable' },
+  { id: 'suelo', nombre: 'Humedad de Suelo', subtitulo: 'Capacitive Soil Moisture', valor: 0, unidad: 'ADC', icono: 'grass', min: 0, max: 4095, estado: 'advertencia', historial: [], minimo: 0, maximo: 0, promedio: 0, tendencia: 'estable' },
   { id: 'tds', nombre: 'Pureza del Agua (TDS)', subtitulo: 'TDS Meter V1.0 (Pin 35)', valor: 0, unidad: 'ppm', icono: 'biotech', min: 0, max: 1000, estado: 'advertencia', historial: [], minimo: 0, maximo: 0, promedio: 0, tendencia: 'estable' },
   { id: 'turbidez', nombre: 'Nivel de Turbidez', subtitulo: 'Turbidity Sensor (Pin 33)', valor: 0, unidad: 'NTU', icono: 'opacity', min: 0, max: 100, estado: 'advertencia', historial: [], minimo: 0, maximo: 0, promedio: 0, tendencia: 'estable' },
   { id: 'agua', nombre: 'Nivel / Detección Líquida', subtitulo: 'Water Level Sensor (Pin 32)', valor: 0, unidad: 'ADC', icono: 'water', min: 0, max: 4095, estado: 'advertencia', historial: [], minimo: 0, maximo: 0, promedio: 0, tendencia: 'estable' },
@@ -28,7 +28,7 @@ export function calcularEstadoSensor(id: string, val: number): EstadoSensor {
 export function procesarSensores(lista: SensorData[], pkg: TelemetriaPaquete, anomalousSensors: string[] = []): SensorData[] {
   const vals: Record<string, number> = {
     temperatura: pkg.temperatura, humedad: pkg.humedad,
-    ph: pkg.ph, oxigeno: pkg.oxigeno, presion: pkg.presion, aire: pkg.aire,
+    ph: pkg.ph, suelo: pkg.suelo, presion: pkg.presion, aire: pkg.aire,
     tds: pkg.tds, turbidez: pkg.turbidez, agua: pkg.aguaAnalogico, caudal: pkg.caudalLMin,
     sedimento: pkg.sedimento, temp_liquido: pkg.temp_liquido
   };

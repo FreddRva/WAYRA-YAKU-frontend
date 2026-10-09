@@ -5,7 +5,7 @@ export interface TelemetriaLog {
   temperatura: number;
   humedad: number;
   ph: number;
-  oxigeno: number;
+  suelo: number;
   presion: number;
   aire: number;
   tds: number;
