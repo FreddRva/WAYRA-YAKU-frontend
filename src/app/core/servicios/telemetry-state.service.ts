@@ -13,7 +13,6 @@ export class TelemetryStateService {
   private readonly http = inject(HttpClient);
 
   private subTelemetria?: Subscription;
-  private aiInterval: any;
 
   readonly conectado = signal(false);
   readonly ultimaActualizacion = signal(new Date());
@@ -104,8 +103,6 @@ export class TelemetryStateService {
 
   private simInterval: any;
   private lastRes1: any = null;
-  private lastRes2: any = null;
-  private lastRes3: any = null;
 
   iniciarLecturas(): void {
     this.subTelemetria?.unsubscribe();
@@ -149,8 +146,6 @@ export class TelemetryStateService {
     try {
       const now = new Date();
       const res1 = this.lastRes1;
-      const res2 = this.lastRes2;
-      const res3 = this.lastRes3;
 
       const caudalActual = res1?.caudal ?? 0;
 
