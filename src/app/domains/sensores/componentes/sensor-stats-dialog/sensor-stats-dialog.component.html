@@ -18,15 +18,25 @@
       </div>
       <div class="flex flex-col">
         <h2 class="m-0 font-brand font-extrabold text-2xl tracking-tight text-white/90">{{ sensor.nombre }}</h2>
-        <div class="flex items-center gap-3 mt-1.5">
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-widest border border-current" style="color: var(--card-accent); background-color: transparent">ESTADO: {{ sensor.estado | uppercase }}</span>
+        <div class="flex flex-wrap items-center gap-2 mt-2">
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-widest border border-current" style="color: var(--card-accent); background-color: transparent">
+            ESTADO: {{ sensor.estado | uppercase }}
+          </span>
           
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-widest border border-white/10 bg-white/5 text-white/50">
-            INSTALACIÓN: HOY
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-widest border border-sky-400/30 bg-sky-500/10 text-sky-300">
+            {{ sensor.espOrigen || 'ESP32' }}
+          </span>
+
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-widest border border-purple-400/30 bg-purple-500/10 text-purple-300">
+            {{ sensor.fase || 'Fase 01' }}
+          </span>
+
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-widest border border-white/10 bg-white/5 text-white/70">
+            INSTALACIÓN: {{ sensor.fechaInstalacion || '14/10/2026' }}
           </span>
 
           <span
-            class="flex items-center gap-2 font-mono text-xs font-semibold"
+            class="flex items-center gap-2 font-mono text-xs font-semibold ml-auto"
             style="color: var(--card-accent)"
           >
             <span
@@ -49,8 +59,33 @@
     </div>
   </div>
 
-  <div class="flex-1 p-6 flex flex-col gap-6 overflow-hidden relative z-10">
-    <div class="flex gap-6 h-full">
+  <div class="flex-1 p-6 flex flex-col gap-4 overflow-hidden relative z-10">
+    <!-- BARRA TÉCNICA: VIDA ÚTIL, MANTENIMIENTO Y SALUD DEL TRANSDUCTOR -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 bg-white/[0.02] border border-white/5 p-3 rounded-xl">
+      <div class="flex flex-col">
+        <span class="text-[9px] font-mono font-bold tracking-wider text-white/40 uppercase">Vida Útil Estimada</span>
+        <span class="text-xs font-mono font-bold text-white/90 mt-0.5">{{ sensor.vidaUtilMeses || 24 }} Meses</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-[9px] font-mono font-bold tracking-wider text-white/40 uppercase">Tiempo Operando</span>
+        <span class="text-xs font-mono font-bold text-sky-400 mt-0.5">{{ sensor.horasOperativas || 720 }} Horas (30 Días)</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-[9px] font-mono font-bold tracking-wider text-white/40 uppercase">Próximo Mantenimiento</span>
+        <span class="text-xs font-mono font-bold text-amber-400 mt-0.5">{{ sensor.proximoMantenimiento || 'En 90 días' }}</span>
+      </div>
+      <div class="flex flex-col">
+        <div class="flex items-center justify-between">
+          <span class="text-[9px] font-mono font-bold tracking-wider text-white/40 uppercase">Salud del Sensor</span>
+          <span class="text-[10px] font-mono font-bold text-emerald-400">{{ sensor.saludPorcentaje || 95 }}%</span>
+        </div>
+        <div class="w-full h-1.5 bg-white/10 rounded-full mt-1.5 overflow-hidden">
+          <div class="h-full bg-emerald-400 rounded-full" [style.width.%]="sensor.saludPorcentaje || 95"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-6 flex-1 overflow-hidden">
       <div class="flex-1 flex flex-col overflow-hidden min-w-0">
         <app-sensor-kpis
           [valor]="sensor.valor"

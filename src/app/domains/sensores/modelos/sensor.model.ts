@@ -16,6 +16,15 @@ export interface SensorData {
   promedio: number;
   tendencia: 'subiendo' | 'bajando' | 'estable';
   extraInfo?: string;
+  // Metadatos de Ciclo de Vida y Mantenimiento
+  fechaInstalacion?: string;
+  vidaUtilMeses?: number;
+  horasOperativas?: number;
+  saludPorcentaje?: number;
+  proximoMantenimiento?: string;
+  espOrigen?: string;
+  fase?: string;
+  tipoSensor?: string;
 }
 
 /** Estructura del JSON que entrega el endpoint GET /sensor del ESP32 */
