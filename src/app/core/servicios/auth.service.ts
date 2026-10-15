@@ -1,4 +1,4 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -14,6 +14,14 @@ export class AuthService {
   private readonly telemetryState = inject(TelemetryStateService);
 
   readonly currentUser = signal<{username: string, role: string} | null>(null);
+
+  readonly isSupervisor = computed(() => this.currentUser()?.role === 'supervisor');
+  readonly isMantenimiento = computed(() => this.currentUser()?.role === 'mantenimiento');
+  readonly canViewMaintenance = computed(() => {
+    const r = this.currentUser()?.role;
+    // Permite ver mantenimiento a supervisor o mantenimiento
+    return r === 'mantenimiento' || r === 'supervisor';
+  });
 
   constructor() {
     this.checkToken();
