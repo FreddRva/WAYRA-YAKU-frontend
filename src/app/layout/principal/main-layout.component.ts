@@ -9,7 +9,6 @@ import { SensorData } from '../../domains/sensores/modelos/sensor.model';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MapaNodosComponent } from '../../domains/telemetria/componentes/mapa-nodos/mapa-nodos.component';
-import { CameraDialogComponent } from '../../domains/telemetria/componentes/mapa-nodos/camera-dialog.component';
 
 @Component({
   selector: 'app-main-layout',
@@ -98,18 +97,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
           element.style.background = ''; // reset on error
         });
       });
-    });
-  }
-
-  abrirMapaCamara(nodeId: number) {
-    this.dialog.open(CameraDialogComponent, {
-      data: { nodeId },
-      panelClass: 'glass-dialog',
-      width: '800px',
-      maxWidth: '95vw',
-      height: '600px',
-      maxHeight: '90vh',
-      backdropClass: 'menu-backdrop'
     });
   }
 
